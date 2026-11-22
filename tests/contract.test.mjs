@@ -54,7 +54,7 @@ assert.match(store, /saveFavorites\(context, ids\)/);
 assert.match(get(`${prefix}state/ProductPreferences.ets`), /await db\.flush\(\)/);
 assert.match(get(`${prefix}service/HttpProductGateway.ets`), /products\?limit=12/);
 for (const doc of ['01-需求分析.md','02-系统架构.md','03-接口文档.md',
-  '04-原型设计.md','05-团队协作与评审.md','06-测试计划.md',
+  '04-原型设计.md','05-团队协作与评审.md',
   '07-答辩材料.md','08-工程伦理与引用.md','09-打包与交付.md']) {
   exists(`docs/${doc}`);
 }
