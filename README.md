@@ -65,9 +65,7 @@ entry/src/main/ets/
 - [接口先行与 Mock 契约](docs/03-接口文档.md)
 - [页面原型与交互说明](docs/04-原型设计.md)（另有 `docs/prototype.html` 可用浏览器打开）
 - [协作与 feature 评审记录模板](docs/05-团队协作与评审.md)
-- [答辩演示材料](docs/07-答辩材料.md) 与 [答辩 PPTX](docs/答辩演示.pptx)
-- [工程伦理与引用](docs/08-工程伦理与引用.md)
-- [打包交付步骤](docs/09-打包与交付.md)
+- [答辩 PPTX](docs/答辩演示.pptx)
 
 在本地安装 Node.js 后可运行不依赖 HarmonyOS SDK 的**契约静态测试**：
 
