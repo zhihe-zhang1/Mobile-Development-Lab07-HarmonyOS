@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>实验七｜商品服务台·交互原型</title>
+<style>
+:root{font-family:system-ui,'Microsoft YaHei',sans-serif;color:#203b2d;background:#ebf2ee}
+*{box-sizing:border-box}body{margin:0;padding:24px;display:grid;place-content:center;min-height:100vh}
+.wrap{max-width:860px}.note{font-size:12px;color:#627f71;margin:0 0 14px}
+.phone{width:min(390px,92vw);min-height:660px;border:9px solid #222e29;border-radius:32px;background:#f4f8f3;overflow:hidden;box-shadow:0 15px 35px #17362733}
+.main{padding:15px;height:585px;overflow:auto}.hero{background:#245643;color:white;border-radius:16px;padding:18px;margin-bottom:12px}
+.kicker{font-size:11px;letter-spacing:2px;color:#cce2d2}.hero h1{margin:6px 0;font-size:25px}.hero small{opacity:.9}
+.panel{padding:13px;border-radius:14px;background:#fff;margin:10px 0}.buttons{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0}
+button{border:0;background:#245643;color:#fff;padding:9px 13px;border-radius:20px;cursor:pointer;font:inherit;font-size:12px}
+button.secondary{background:#e7f2ea;color:#245643}button.active{outline:3px solid #9fceae}
+#status{font-weight:600;color:#245643}#cards{margin-top:8px}.product{display:flex;gap:12px;align-items:center;padding:14px 9px;border-bottom:1px solid #e9eee9;cursor:pointer}
+.product .initial{background:#e2f0e6;border-radius:12px;padding:10px;font-size:17px;font-weight:700}
+.product .details{flex:1;font-size:13px}.product small{color:#657970;display:block;margin-top:4px}.product strong{font-size:14px}
+.product .price{color:#aa4d31;font-weight:700}.bottom{height:55px;display:flex;justify-content:space-around;background:#fff;align-items:center}
+.bottom button{background:none;color:#245643;font-size:15px}.hidden{display:none}input{width:100%;border:1px solid #d8e3da;border-radius:12px;padding:12px;margin-top:10px}
+.detail h2{margin-top:6px} .detail p{color:#5c7264} .detail .price{font-size:20px;color:#ac5138} .detail button{margin-top:12px}
+</style>
+</head><body><div class="wrap"><p class="note">交互原型（HTML）。此页面不是 HarmonyOS App 运行截图，数据均为设计用 Mock。</p>
+<div class="phone"><div class="main">
+<div class="hero"><div class="kicker">LAB 07 · ARKTS</div><h1>商品服务台</h1><small>页面 / 组件 / 状态 / 服务 · 四层架构</small></div>
+<div id="catalog"><div class="panel"><strong>数据源与状态验证</strong><div class="buttons">
+<button onclick="load('success')">Mock 商品</button><button onclick="load('empty')">空列表</button><button onclick="load('error')">模拟失败</button>
+</div><small>原型只展示 Mock 交互，不调用真实外部接口。</small></div>
+<div class="panel"><div id="status">成功 · Success（本地 Mock）</div><input id="search" placeholder="搜索商品名称、编号或分类" oninput="render()"><div id="cards"></div></div></div>
+<div id="detail" class="panel detail hidden"><button class="secondary" onclick="back()">返回</button><h2 id="product-title"></h2><div class="price" id="product-price"></div><p id="product-desc"></p><label><input type="checkbox" id="favorite-switch" style="width:auto"> 收藏商品</label><br><button onclick="saveFavorite()">保存并返回</button></div>
+</div><div class="bottom"><button onclick="setTab('all')">商品</button><button onclick="setTab('favorites')">收藏 <span id="count">0</span></button></div></div>
+</div><script>
+const list=[{id:'EL-101',name:'无线蓝牙耳机',category:'数码',price:129,description:'适合通勤和学习。'},
+{id:'DS-102',name:'方格笔记本',category:'文具',price:19.9,description:'用于课堂笔记。'},
+{id:'EL-103',name:'折叠桌面支架',category:'数码',price:39.9,description:'可折叠收纳。'},
+{id:'LT-104',name:'随行保温杯',category:'日用',price:69,description:'适合日常出行。'},
+{id:'DS-105',name:'抽绳帆布笔袋',category:'文具',price:29.9,description:'方便整理文具。'}];
+let mode='success',tab='all',saved=[],current='';
+function render(){const status=document.getElementById('status'),cards=document.getElementById('cards');
+if(mode==='error'){status.textContent='失败 · Error（Mock 测试）';cards.innerHTML='<button onclick="load(\'success\')">重试</button>';return}
+if(mode==='empty'){status.textContent='空数据 · Empty';cards.innerHTML='没有商品';return}
+status.textContent='成功 · Success（本地 Mock）';const q=document.getElementById('search').value.trim().toLowerCase();
+const rows=list.filter(x=>(tab==='all'||saved.includes(x.id))&&[x.id,x.name,x.category].some(y=>y.toLowerCase().includes(q)));
+cards.innerHTML=rows.length?rows.map(x=>`<div class="product" onclick="detail('${x.id}')"><div class="initial">${x.name[0]}</div><div class="details"><strong>${x.name}</strong><small>${x.category} · ${x.id}</small></div><div class="price">¥${x.price.toFixed(2)}</div></div>`).join(''):'没有匹配的商品';
+document.getElementById('count').textContent=saved.length;}
+function load(v){mode=v;render()};function setTab(v){tab=v;back();render()}
+function detail(id){current=id;const p=list.find(x=>x.id===id);document.getElementById('product-title').textContent=p.name;document.getElementById('product-price').textContent='¥'+p.price.toFixed(2);document.getElementById('product-desc').textContent=p.description;document.getElementById('favorite-switch').checked=saved.includes(id);document.getElementById('catalog').classList.add('hidden');document.getElementById('detail').classList.remove('hidden')}
+function back(){document.getElementById('catalog').classList.remove('hidden');document.getElementById('detail').classList.add('hidden')}
+function saveFavorite(){saved=saved.filter(id=>id!==current);if(document.getElementById('favorite-switch').checked)saved.push(current);back();render()}
+render();
+</script></body></html>

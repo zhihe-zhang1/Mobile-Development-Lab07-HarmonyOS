@@ -1,0 +1,52 @@
+{
+  "contractVersion": "1.0",
+  "source": "local-mock",
+  "disclaimer": "All values are illustrative and are not live merchant inventory or prices.",
+  "products": [
+    {
+      "id": "EL-101",
+      "name": "无线蓝牙耳机",
+      "category": "数码",
+      "price": 129.0,
+      "currency": "CNY",
+      "stock": 18,
+      "description": "轻巧的入耳设计，适合通勤和学习。"
+    },
+    {
+      "id": "DS-102",
+      "name": "方格笔记本",
+      "category": "文具",
+      "price": 19.9,
+      "currency": "CNY",
+      "stock": 42,
+      "description": "细方格内页，方便整理课堂笔记。"
+    },
+    {
+      "id": "EL-103",
+      "name": "折叠桌面支架",
+      "category": "数码",
+      "price": 39.9,
+      "currency": "CNY",
+      "stock": 24,
+      "description": "可折叠收纳，适合桌面摆放手机。"
+    },
+    {
+      "id": "LT-104",
+      "name": "随行保温杯",
+      "category": "日用",
+      "price": 69.0,
+      "currency": "CNY",
+      "stock": 31,
+      "description": "旋盖式随行杯，适合日常出行。"
+    },
+    {
+      "id": "DS-105",
+      "name": "抽绳帆布笔袋",
+      "category": "文具",
+      "price": 29.9,
+      "currency": "CNY",
+      "stock": 26,
+      "description": "可放入多支笔和小尺子。"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+.hvigor/
+.idea/
+.preview/
+build/
+**/build/
+**/oh_modules/
+**/node_modules/
+**/unpackage/
+local.properties
+*.hap
+*.app
+*.hsp

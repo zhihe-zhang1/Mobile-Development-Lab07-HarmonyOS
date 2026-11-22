@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "四层架构商品列表：API、Mock、搜索、收藏和本地持久化"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "实验七应用入口"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "实验七 商品服务台"
+    }
+  ]
+}
